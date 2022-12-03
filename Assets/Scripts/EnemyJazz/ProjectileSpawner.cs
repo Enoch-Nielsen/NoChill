@@ -31,6 +31,7 @@ public class ProjectileSpawner : MonoBehaviour
         GetNewTransform();
         attackNumber = GetAttackNumber();
         StartCoroutine(HoldAttack());
+        StartCoroutine(AttackR());
         //StartAttack();
     }
 
@@ -148,9 +149,27 @@ public class ProjectileSpawner : MonoBehaviour
         StartCoroutine(HoldAttack());
     }
 
+    private IEnumerator AttackR()
+    {
+        float waitTime = Random.Range(0.1f, 10f);
+        yield return new WaitForSeconds(waitTime);
+        float randomProjectile = Random.Range(-2, 3);
+        if(randomProjectile < 0)
+        {
+            icicle.GetComponent<Projectile>().attackNumber = 1;
+            Instantiate(icicle, projectileSpawnPoint, icicle.transform.rotation);
+        }else if(randomProjectile > 0)
+        {
+            snowBall.GetComponent<Projectile>().attackNumber = 1;
+            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+        }
+
+        StartCoroutine(AttackR());
+    }
+
     private IEnumerator HoldAttack()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         Debug.Log("Hamburger");
         StartAttack();
     }
