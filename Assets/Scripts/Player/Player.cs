@@ -96,6 +96,8 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Owch!");
+        
         if (other.CompareTag("Snowball"))
         {
             Damage(7, false);
