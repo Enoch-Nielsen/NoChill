@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8233973432544136036}
   m_Layer: 0
   m_Name: IcicleParent
-  m_TagString: Untagged
+  m_TagString: Icicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   isIcicle: 1
+  attackNumber: 1
 --- !u!1001 &277372021627009
 PrefabInstance:
   m_ObjectHideFlags: 0

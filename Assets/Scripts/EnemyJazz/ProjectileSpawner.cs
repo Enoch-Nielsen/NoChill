@@ -75,6 +75,7 @@ public class ProjectileSpawner : MonoBehaviour
         {
             GetNewTransform();
             Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+            snowBall.GetComponent<Projectile>().attackNumber = attackNumber;
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -84,6 +85,18 @@ public class ProjectileSpawner : MonoBehaviour
     private IEnumerator Attack2()
     {
         yield return new WaitForSeconds(1.0f);
+        projectileSpawnPoint.x = -10;
+        projectileSpawnPoint.y = 13;
+        for (int i = 0; i < 55; i++)
+        {
+            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+            projectileSpawnPoint.x += 2;
+            if(projectileSpawnPoint.x > 10)
+            {
+                projectileSpawnPoint.x = -10;
+                projectileSpawnPoint.y -= 2;
+            }
+        }
     }
     
     private IEnumerator HoldAttack()

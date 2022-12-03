@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5214434753698161096}
   m_Layer: 0
   m_Name: SnowBallParent
-  m_TagString: Untagged
+  m_TagString: Snowball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  rotationModifyer: 60
+  isIcicle: 0
+  attackNumber: 1
 --- !u!1001 &8276604723684196130
 PrefabInstance:
   m_ObjectHideFlags: 0
