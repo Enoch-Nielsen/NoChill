@@ -47,7 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   isIcicle: 1
-  attackNumber: 1
+  attackNumber: 6
+  leftRight: 2
+  destroyTime: 3
 --- !u!1001 &277372021627009
 PrefabInstance:
   m_ObjectHideFlags: 0

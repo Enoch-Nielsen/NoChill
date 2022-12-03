@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField] private GameObject icicle = null;
     public GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 5;
+    private int totalAttacks = 6;
     
     //Boundries
     private float xMin = 11;
@@ -71,6 +71,12 @@ public class ProjectileSpawner : MonoBehaviour
         if (attackNumber == 5)
         {
             StartCoroutine(Attack5());
+            return;
+        }
+
+        if (attackNumber == 6)
+        {
+            StartCoroutine(Attack6());
             return;
         }
     }
@@ -165,6 +171,41 @@ public class ProjectileSpawner : MonoBehaviour
         }
 
         StartCoroutine(AttackR());
+    }
+
+    private IEnumerator Attack6()
+    {
+        int whichOne = 1;
+        snowBall.GetComponent<Projectile>().speed /= 1.5f;
+        icicle.GetComponent<Projectile>().speed /= 1.5f;
+        snowBall.GetComponent<Projectile>().destroyTime *= 3;
+        icicle.GetComponent<Projectile>().destroyTime *= 3;
+        for (int i = 0; i < 25; i++)
+        {
+            GetNewTransform();
+            snowBall.GetComponent<Projectile>().attackNumber = attackNumber;
+            icicle.GetComponent<Projectile>().attackNumber = attackNumber;
+
+
+
+
+            if (whichOne > 0)
+            {
+                Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+            }
+            else
+            {
+                Instantiate(icicle, projectileSpawnPoint, snowBall.transform.rotation);
+            }
+            whichOne *= -1;
+        }
+        snowBall.GetComponent<Projectile>().speed *= 1.5f;
+        icicle.GetComponent<Projectile>().speed *= 1.5f;
+        snowBall.GetComponent<Projectile>().destroyTime /= 3;
+        icicle.GetComponent<Projectile>().destroyTime /= 3;
+        yield return new WaitForSeconds(1.0f);
+
+        StartCoroutine(HoldAttack());
     }
 
     private IEnumerator HoldAttack()
