@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField] private GameObject icicle = null;
     public GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 6;
+    private int totalAttacks = 1;
     
     //Boundries
     private float xMin = 11;
@@ -84,12 +84,12 @@ public class ProjectileSpawner : MonoBehaviour
 
     private IEnumerator Attack1()
     {
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < 40; i++)
         {
             GetNewTransform();
             snowBall.GetComponent<Projectile>().attackNumber = attackNumber;
             Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
         }
 
         StartCoroutine(HoldAttack());
