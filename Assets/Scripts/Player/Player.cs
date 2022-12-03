@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
 
     public bool punchReady { get; private set; }
 
+    private void Start()
+    {
+        isInvincible = false;
+    }
+
     private void Update()
     {
         if (rage < maxRage)
@@ -38,6 +43,8 @@ public class Player : MonoBehaviour
 
         if (punchReady)
             SetInvincible(100.0f);
+        
+       // Debug.Log(isInvincible);
     }
 
     // for rage text value.
@@ -71,6 +78,8 @@ public class Player : MonoBehaviour
         invincibilityTimer = 0.0f;
 
         isInvincible = true;
+        
+        Debug.Log("Invincible for: " + time);
     }
 
     /**
@@ -80,7 +89,10 @@ public class Player : MonoBehaviour
     public void Damage(float damageValue, bool doesSlow)
     {
         if (isInvincible)
+        {
+            Debug.Log("Damage Failed");
             return;
+        }
         
         rage -= damageValue;
 
@@ -92,20 +104,9 @@ public class Player : MonoBehaviour
         isSlowed = doesSlow;
 
         slowTimer = 0.0f;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Owch!");
         
-        if (other.CompareTag("Snowball"))
-        {
-            Damage(7, false);
-        }
-
-        if (other.CompareTag("Icicle"))
-        {
-            Damage(10, true);
-        }
+        SetInvincible(0.25f);
+        
+        Debug.Log("Owch!");
     }
 }
