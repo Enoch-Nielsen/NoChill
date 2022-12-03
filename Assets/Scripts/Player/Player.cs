@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    [SerializeField] private CameraShake cameraShake;
     [SerializeField] private PlayerMove playerMove;
     
     [SerializeField] private float rage, maxRage;
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
         isInvincible = true;
         
-        Debug.Log("Invincible for: " + time);
+        //Debug.Log("Invincible for: " + time);
     }
 
     /**
@@ -107,6 +107,6 @@ public class Player : MonoBehaviour
         
         SetInvincible(0.25f);
         
-        Debug.Log("Owch!");
+        //cameraShake.Shake(0.25f);
     }
 }
