@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 519335128745366661}
   m_Layer: 0
   m_Name: IcicleThomas
-  m_TagString: Untagged
+  m_TagString: Icicle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

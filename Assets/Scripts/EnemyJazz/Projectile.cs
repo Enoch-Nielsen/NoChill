@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
         xRotation = this.transform.rotation.x;
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if(attackNumber == 1)
+        if(attackNumber == 1 || attackNumber == 5)
         {
             transform.LookAt(player.transform);
         }
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(attackNumber == 1)
+        if(attackNumber == 1 || attackNumber == 5)
         {
             transform.Translate((Vector3.forward).normalized * Time.deltaTime * speed);
         }
