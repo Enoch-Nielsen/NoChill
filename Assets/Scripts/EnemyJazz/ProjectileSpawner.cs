@@ -6,9 +6,9 @@ public class ProjectileSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject snowBall = null;
     [SerializeField] private GameObject icicle = null;
-    [SerializeField] private GameObject player = null;
+    public GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 3;
+    private int totalAttacks = 4;
     
     //Boundries
     private float xMin = 11;
@@ -63,7 +63,7 @@ public class ProjectileSpawner : MonoBehaviour
 
         if (attackNumber == 4)
         {
-            //Attack4();
+            StartCoroutine(Attack4());
             return;
         }
     }
@@ -127,6 +127,20 @@ public class ProjectileSpawner : MonoBehaviour
                     projectileSpawnPoint.x *= -1;
                 }
             }
+        }
+        StartCoroutine(HoldAttack());
+    }
+
+    private IEnumerator Attack4()
+    {
+        yield return new WaitForSeconds(0.5f);
+        projectileSpawnPoint.x = -11;
+        projectileSpawnPoint.y = 4.5f;
+        snowBall.GetComponent<Projectile>().attackNumber = attackNumber;
+        for(int i = 0; i < 5; i++)
+        {
+            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+            projectileSpawnPoint.y -= 2;
         }
         StartCoroutine(HoldAttack());
     }

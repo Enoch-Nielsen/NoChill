@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerRotate : MonoBehaviour
 {
     public Rigidbody2D rb2d;
+    [SerializeField] private Transform imageTransform;
     [SerializeField] private PlayerMove playerMove;
 
     [SerializeField] private float currentRotation, rotationGoal, rotationLerp;
@@ -35,6 +36,6 @@ public class PlayerRotate : MonoBehaviour
         
         currentRotation = Mathf.Lerp(currentRotation, rotationGoal, Time.deltaTime * rotationLerp);
 
-        rb2d.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, currentRotation));
+        imageTransform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, currentRotation));
     }
 }

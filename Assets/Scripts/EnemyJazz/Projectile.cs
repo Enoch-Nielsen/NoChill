@@ -49,11 +49,16 @@ public class Projectile : MonoBehaviour
             }
         }
 
+        if(attackNumber == 4)
+        {
+            transform.Translate(Vector3.forward.normalized * Time.deltaTime * speed);
+        }
+
     }
 
     private IEnumerator SelfDestruct()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
         Destroy(this.gameObject);
     }
 
