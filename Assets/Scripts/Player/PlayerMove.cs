@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     [Header("Objects")] 
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private Animator animator;
+    [SerializeField] private Player player;
     
     [Header("Player Move")]
     [SerializeField] private float playerSpeed;
@@ -82,7 +83,7 @@ public class PlayerMove : MonoBehaviour
         animator.SetFloat("X", vel.x);
         animator.SetFloat("Y", vel.y);
         
-        Debug.Log(vel);
+        //Debug.Log(vel);
     }
 
     private Vector2 RoundAnimVelocity()
@@ -127,5 +128,7 @@ public class PlayerMove : MonoBehaviour
             dodgeTimer = 0.0f;
             dodgeDelayTimer = 0.0f;
         }
+        
+        player.SetInvincible(dodgeMaxTime * 5);
     }
 }
