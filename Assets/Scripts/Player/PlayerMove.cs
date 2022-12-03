@@ -20,12 +20,13 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeMoveLerp;
     [SerializeField] private float dodgeMaxTime, dodgeTimer;
-    [SerializeField] private float dodgeDelay, dodgeDelayTimer;
+    
+    public float dodgeDelay { get; private set; }
+    public float dodgeDelayTimer { get; private set; }
 
     public bool isDodge { get; private set; }
     public bool isMoving { get; private set; }
-
-
+    
     private void Start()
     {
         currentSpeed = playerSpeed;

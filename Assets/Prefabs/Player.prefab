@@ -150,8 +150,6 @@ MonoBehaviour:
   dodgeMoveLerp: 15
   dodgeMaxTime: 0.125
   dodgeTimer: 0
-  dodgeDelay: 1
-  dodgeDelayTimer: 0
 --- !u!50 &6736037435301117273
 Rigidbody2D:
   serializedVersion: 4
@@ -230,3 +228,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ae61c42f8e749a4b82d87319d755cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMove: {fileID: 6736037435301117276}
+  rage: 0
+  maxRage: 40
+  rageSpeed: 2.5
+  slowedRageSpeed: 1
+  isSlowed: 0
+  slowTimer: 0
+  slowTimerMax: 5
+  invincibilityTimer: 0
+  invincibilityMax: 0
