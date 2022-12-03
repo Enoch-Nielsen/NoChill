@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField] private GameObject icicle = null;
     public GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 1;
+    private int totalAttacks = 6;
     
     //Boundries
     private float xMin = 11;
