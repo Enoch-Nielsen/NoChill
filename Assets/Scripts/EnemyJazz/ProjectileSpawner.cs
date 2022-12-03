@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField] private GameObject icicle = null;
     [SerializeField] private GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 2;
+    private int totalAttacks = 3;
     
     //Boundries
     private float xMin = 11;
@@ -57,7 +57,7 @@ public class ProjectileSpawner : MonoBehaviour
 
         if (attackNumber == 3)
         {
-            //Attack3);
+            StartCoroutine(Attack3());
             return;
         }
 
@@ -74,8 +74,8 @@ public class ProjectileSpawner : MonoBehaviour
         for (int i = 0; i < 50; i++)
         {
             GetNewTransform();
-            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
             snowBall.GetComponent<Projectile>().attackNumber = attackNumber;
+            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -89,6 +89,7 @@ public class ProjectileSpawner : MonoBehaviour
         projectileSpawnPoint.y = 13;
         for (int i = 0; i < 55; i++)
         {
+            snowBall.GetComponent<Projectile>().attackNumber = attackNumber;
             Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
             projectileSpawnPoint.x += 2;
             if(projectileSpawnPoint.x > 10)
@@ -97,8 +98,39 @@ public class ProjectileSpawner : MonoBehaviour
                 projectileSpawnPoint.y -= 2;
             }
         }
+        StartCoroutine(HoldAttack());
     }
     
+    private IEnumerator Attack3()
+    {
+        yield return new WaitForSeconds(0.5f);
+        //float icicleRotation = 0;
+        projectileSpawnPoint.x = 11;
+        projectileSpawnPoint.y = 4.5f;
+        icicle.GetComponent<Projectile>().attackNumber = attackNumber;
+        for(int i = 0; i < 10; i++)
+        {
+            if(projectileSpawnPoint.y > 0)
+            {
+                icicle.GetComponent<Projectile>().leftRight = 1;
+            }else if(projectileSpawnPoint.y < 0)
+            {
+                icicle.GetComponent<Projectile>().leftRight = 2;
+            }
+            Instantiate(icicle, projectileSpawnPoint, (icicle.GetComponent<Projectile>().GetTransform().rotation));
+            projectileSpawnPoint.y -= 1;
+            if (projectileSpawnPoint.y < 0)
+            {
+                
+                if(projectileSpawnPoint.x > 0)
+                {
+                    projectileSpawnPoint.x *= -1;
+                }
+            }
+        }
+        StartCoroutine(HoldAttack());
+    }
+
     private IEnumerator HoldAttack()
     {
         yield return new WaitForSeconds(3);
@@ -108,7 +140,7 @@ public class ProjectileSpawner : MonoBehaviour
 
     private int GetAttackNumber()
     {
-        return Random.Range(1, totalAttacks);
+        return Random.Range(1, totalAttacks + 1);
     }
 
     private void GetNewTransform()
