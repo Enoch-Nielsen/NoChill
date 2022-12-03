@@ -66,6 +66,12 @@ public class ProjectileSpawner : MonoBehaviour
             StartCoroutine(Attack4());
             return;
         }
+
+        if (attackNumber == 5)
+        {
+            StartCoroutine(Attack5());
+            return;
+        }
     }
 
 
@@ -104,7 +110,7 @@ public class ProjectileSpawner : MonoBehaviour
     private IEnumerator Attack3()
     {
         yield return new WaitForSeconds(0.5f);
-        //float icicleRotation = 0;
+        Quaternion xRotation = new Quaternion(0, 0, 0, 0);
         projectileSpawnPoint.x = 11;
         projectileSpawnPoint.y = 4.5f;
         icicle.GetComponent<Projectile>().attackNumber = attackNumber;
@@ -145,6 +151,18 @@ public class ProjectileSpawner : MonoBehaviour
         StartCoroutine(HoldAttack());
     }
 
+    private IEnumerator Attack5()
+    {
+        icicle.GetComponent<Projectile>().attackNumber = attackNumber;
+        for(int i = 0; i < 15; i++)
+        {
+            yield return new WaitForSeconds(0.4f);
+            GetNewTransformTwo();
+            Instantiate(icicle, projectileSpawnPoint, icicle.transform.rotation);
+        }
+        StartCoroutine(HoldAttack());
+    }
+
     private IEnumerator HoldAttack()
     {
         yield return new WaitForSeconds(3);
@@ -173,5 +191,13 @@ public class ProjectileSpawner : MonoBehaviour
         }
         Vector3 randomSpawnPosition = new Vector3(xPos, yPos, 0.0f);
         projectileSpawnPoint = randomSpawnPosition;
+    }
+
+    private void GetNewTransformTwo()
+    {
+        float yPos = Random.Range(6, 9) * side;
+        side *= -1;
+        xPos1 = Random.Range(-11, 12);
+        projectileSpawnPoint = new Vector3(xPos1, yPos, 0.0f);
     }
 }
