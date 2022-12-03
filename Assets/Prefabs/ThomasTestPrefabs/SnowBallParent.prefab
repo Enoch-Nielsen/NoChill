@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e78f695e4939d4d8393ed362061787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 7
   isIcicle: 0
-  attackNumber: 6
+  attackNumber: 1
   leftRight: 1
   destroyTime: 3
 --- !u!1001 &8276604723684196130

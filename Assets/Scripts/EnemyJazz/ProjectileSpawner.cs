@@ -211,7 +211,6 @@ public class ProjectileSpawner : MonoBehaviour
     private IEnumerator HoldAttack()
     {
         yield return new WaitForSeconds(1.5f);
-        Debug.Log("Hamburger");
         StartAttack();
     }
 
