@@ -11,21 +11,26 @@ public class ProjectileSpawner : MonoBehaviour
     private int totalAttacks = 2;
     
     //Boundries
-    private float xMin = 0;
-    private float xMax = 10;
-    private float yMin = 0;
-    private float yMax = 10;
+    private float xMin = 11;
+    private float xMax = 16;
+
+    private float yMin = -8;
+    private float yMax = 8;
 
     //transform Variables
-    private float xPos = 0;
+    private float xPos1 = 0;
+    private float xPos2 = 0;
     private float yPos = 0;
     private Vector3 projectileSpawnPoint = new Vector3(0, 0, 0);
+
+    //Other Important things
+    private int side = 1;
     // Start is called before the first frame update
     void Start()
     {
         GetNewTransform();
         attackNumber = GetAttackNumber();
-        StartCoroutine(holdAttack());
+        StartCoroutine(HoldAttack());
         //StartAttack();
     }
 
@@ -40,13 +45,13 @@ public class ProjectileSpawner : MonoBehaviour
         attackNumber = GetAttackNumber();
         if(attackNumber == 1)
         {
-            Attack1();
+            StartCoroutine(Attack1());
             return;
         }
 
         if (attackNumber == 2)
         {
-            Attack2();
+            StartCoroutine(Attack2());
             return;
         }
 
@@ -63,25 +68,8 @@ public class ProjectileSpawner : MonoBehaviour
         }
     }
 
-    private void Attack1()
-    {
-        /*for(int i = 1; i < 4; i++)
-        {
-            GetNewTransform();
-            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
-            
-        }*/
-        StartCoroutine(StartAttack1());
 
-        StartCoroutine(holdAttack());
-    }
-
-    private void Attack2()
-    {
-        Attack1();
-    }
-
-    private IEnumerator StartAttack1()
+    private IEnumerator Attack1()
     {
         for (int i = 0; i < 50; i++)
         {
@@ -89,9 +77,16 @@ public class ProjectileSpawner : MonoBehaviour
             Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
             yield return new WaitForSeconds(0.1f);
         }
+
+        StartCoroutine(HoldAttack());
     }
 
-    private IEnumerator holdAttack()
+    private IEnumerator Attack2()
+    {
+        yield return new WaitForSeconds(1.0f);
+    }
+    
+    private IEnumerator HoldAttack()
     {
         yield return new WaitForSeconds(3);
         Debug.Log("Hamburger");
@@ -105,8 +100,18 @@ public class ProjectileSpawner : MonoBehaviour
 
     private void GetNewTransform()
     {
-        xPos = Random.Range(xMin, xMax);
+        float xPos = 0;
+        side *= -1;
+        xPos1 = Random.Range(xMin, xMax);
         yPos = Random.Range(yMin, yMax);
+        xPos2 = Random.Range(-xMin, -xMax);
+        if(side > 0)
+        {
+            xPos = xPos1;
+        }else if (side < 0)
+        {
+            xPos = xPos2;
+        }
         Vector3 randomSpawnPosition = new Vector3(xPos, yPos, 0.0f);
         projectileSpawnPoint = randomSpawnPosition;
     }

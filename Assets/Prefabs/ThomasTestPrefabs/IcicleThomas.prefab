@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5748719348051476764}
   - component: {fileID: 7450210630748295032}
-  - component: {fileID: 8092180207366947570}
   m_Layer: 0
   m_Name: IcicleThomas
   m_TagString: Untagged
@@ -85,17 +84,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8092180207366947570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5830228948437064623}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9e78f695e4939d4d8393ed362061787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  rotationModifyer: 0
