@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField] private GameObject icicle = null;
     public GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 4;
+    private int totalAttacks = 5;
     
     //Boundries
     private float xMin = 11;
@@ -110,29 +110,14 @@ public class ProjectileSpawner : MonoBehaviour
     private IEnumerator Attack3()
     {
         yield return new WaitForSeconds(0.5f);
-        Quaternion xRotation = new Quaternion(0, 0, 0, 0);
-        projectileSpawnPoint.x = 11;
-        projectileSpawnPoint.y = 4.5f;
+        projectileSpawnPoint.x = -11;
+        projectileSpawnPoint.y = Random.Range(-0.5f, 5.5f);
         icicle.GetComponent<Projectile>().attackNumber = attackNumber;
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 5; i++)
         {
-            if(projectileSpawnPoint.y > 0)
-            {
-                icicle.GetComponent<Projectile>().leftRight = 1;
-            }else if(projectileSpawnPoint.y < 0)
-            {
-                icicle.GetComponent<Projectile>().leftRight = 2;
-            }
-            Instantiate(icicle, projectileSpawnPoint, (icicle.GetComponent<Projectile>().GetTransform().rotation));
+            Instantiate(icicle, projectileSpawnPoint, icicle.transform.rotation);
             projectileSpawnPoint.y -= 1;
-            if (projectileSpawnPoint.y < 0)
-            {
-                
-                if(projectileSpawnPoint.x > 0)
-                {
-                    projectileSpawnPoint.x *= -1;
-                }
-            }
+
         }
         StartCoroutine(HoldAttack());
     }
