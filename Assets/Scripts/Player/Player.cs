@@ -93,4 +93,17 @@ public class Player : MonoBehaviour
 
         slowTimer = 0.0f;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Snowball"))
+        {
+            Damage(7, false);
+        }
+
+        if (other.CompareTag("Icicle"))
+        {
+            Damage(10, true);
+        }
+    }
 }
