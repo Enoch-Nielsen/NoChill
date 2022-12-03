@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-
     [Header("Objects")] 
     [SerializeField] private Rigidbody2D rb2d;
+    [SerializeField] private Animator animator;
     
     [Header("Player Move")]
     [SerializeField] private float playerSpeed;
@@ -33,6 +33,8 @@ public class PlayerMove : MonoBehaviour
         speedGoal = playerSpeed;
         dodgeTimer = dodgeMaxTime;
         dodgeDelayTimer = 0.0f;
+
+        dodgeDelay = 1f;
     }
 
     private void Update()
@@ -69,15 +71,36 @@ public class PlayerMove : MonoBehaviour
         {
             playerMove.y = 0;
         }
-        
-
-        //rb2d.velocity = playerMove * currentSpeed * Time.deltaTime;
-        //transform.Translate(playerMove * currentSpeed * Time.deltaTime);
     }
 
     private void FixedUpdate()
     {
         rb2d.velocity = playerMove * currentSpeed * 200.0f * Time.fixedDeltaTime;
+
+        Vector2 vel = RoundAnimVelocity();
+        
+        animator.SetFloat("X", vel.x);
+        animator.SetFloat("Y", vel.y);
+        
+        Debug.Log(vel);
+    }
+
+    private Vector2 RoundAnimVelocity()
+    {
+        Vector2 temp = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
+
+        if (Mathf.Abs(temp.y) > Mathf.Abs(temp.x))
+        {
+            temp.x = 0.0f;
+            temp.y = 1.0f * temp.y > 0.0f ? 1.0f : -1.0f;
+        }
+        else
+        {
+            temp.x = 1.0f * temp.x > 0.0f ? 1.0f : -1.0f;
+            temp.y = 0.0f;
+        }
+
+        return temp;
     }
 
     private void OnMove(InputValue value)
@@ -94,6 +117,9 @@ public class PlayerMove : MonoBehaviour
 
     private void OnDodge()
     {
+        if (rb2d.velocity.magnitude < 1.0f)
+            return;
+
         if (dodgeDelayTimer >= dodgeDelay)
         {
             speedGoal = dodgeSpeed;
