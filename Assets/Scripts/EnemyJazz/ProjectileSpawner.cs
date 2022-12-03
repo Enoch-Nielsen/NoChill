@@ -25,7 +25,7 @@ public class ProjectileSpawner : MonoBehaviour
     {
         GetNewTransform();
         attackNumber = GetAttackNumber();
-        StartCoroutine(holdAttack());
+        StartCoroutine(HoldAttack());
         //StartAttack();
     }
 
@@ -40,13 +40,13 @@ public class ProjectileSpawner : MonoBehaviour
         attackNumber = GetAttackNumber();
         if(attackNumber == 1)
         {
-            Attack1();
+            StartCoroutine(Attack1());
             return;
         }
 
         if (attackNumber == 2)
         {
-            Attack2();
+            StartCoroutine(Attack2());
             return;
         }
 
@@ -63,25 +63,8 @@ public class ProjectileSpawner : MonoBehaviour
         }
     }
 
-    private void Attack1()
-    {
-        /*for(int i = 1; i < 4; i++)
-        {
-            GetNewTransform();
-            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
-            
-        }*/
-        StartCoroutine(StartAttack1());
 
-        StartCoroutine(holdAttack());
-    }
-
-    private void Attack2()
-    {
-        Attack1();
-    }
-
-    private IEnumerator StartAttack1()
+    private IEnumerator Attack1()
     {
         for (int i = 0; i < 50; i++)
         {
@@ -89,9 +72,16 @@ public class ProjectileSpawner : MonoBehaviour
             Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
             yield return new WaitForSeconds(0.1f);
         }
+
+        StartCoroutine(HoldAttack());
     }
 
-    private IEnumerator holdAttack()
+    private IEnumerator Attack2()
+    {
+        yield return new WaitForSeconds(1.0f);
+    }
+    
+    private IEnumerator HoldAttack()
     {
         yield return new WaitForSeconds(3);
         Debug.Log("Hamburger");
