@@ -107,6 +107,6 @@ public class Player : MonoBehaviour
         
         SetInvincible(0.25f);
         
-        cameraShake.Shake(0.25f);
+        //cameraShake.Shake(0.25f);
     }
 }
