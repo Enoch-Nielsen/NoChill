@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: SnowMan
+    uniqueID: 4294789049
+    locked: 0
+  - name: Glacier
+    uniqueID: 3349237083
+    locked: 0
