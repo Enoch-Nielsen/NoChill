@@ -354,7 +354,7 @@ MonoBehaviour:
   dodgeMaxTime: 0.125
   dodgeTimer: 0
   audioManager: {fileID: 0}
-  dodge: {fileID: 0}
+  dodge: {fileID: 8300000, guid: b45c5774afe7e2f4b87bbacaa7541514, type: 3}
 --- !u!50 &6736037435301117273
 Rigidbody2D:
   serializedVersion: 4

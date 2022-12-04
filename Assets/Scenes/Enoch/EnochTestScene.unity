@@ -674,7 +674,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6736037435301117276, guid: 511aaca312dac0f42a39e7e7f3e1b5ce, type: 3}
       propertyPath: outsideForceLerp
-      value: 5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6736037435301117279, guid: 511aaca312dac0f42a39e7e7f3e1b5ce, type: 3}
       propertyPath: m_Name

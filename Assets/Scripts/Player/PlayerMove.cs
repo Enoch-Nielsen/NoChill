@@ -47,6 +47,8 @@ public class PlayerMove : MonoBehaviour
         dodgeDelayTimer = 0.0f;
 
         dodgeDelay = 1f;
+        
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -122,7 +124,7 @@ public class PlayerMove : MonoBehaviour
 
     public void AddForce(Vector2 force)
     {
-        outsideForce += force;
+        outsideForce = force;
     }
 
     private void OnMove(InputValue value)
@@ -151,7 +153,9 @@ public class PlayerMove : MonoBehaviour
         }
 
         Instantiate(trailBlaze, transform.position, Quaternion.identity);
+        
+        audioManager.AddSoundToQueue(dodge, false, 0.35f);
 
-        player.SetInvincible(dodgeMaxTime * 5);
+        player.SetInvincible(0.55f);
     }
 }
