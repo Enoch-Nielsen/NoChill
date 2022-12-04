@@ -18,7 +18,7 @@ public class PlayerHitbox : MonoBehaviour
                 Destroy(other.gameObject, 0.05f);
             }
 
-            player.Damage(7, false, other.transform.position);
+            player.Damage(5, false, other.transform.position);
         }
         
         if (other.CompareTag("Icicle"))
@@ -31,7 +31,7 @@ public class PlayerHitbox : MonoBehaviour
                 Destroy(other.gameObject, 0.05f);
             }
             
-            player.Damage(10, true, other.transform.position);
+            player.Damage(5, true, other.transform.position);
         }
     }
 }
