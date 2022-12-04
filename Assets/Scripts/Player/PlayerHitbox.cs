@@ -10,12 +10,12 @@ public class PlayerHitbox : MonoBehaviour
     {
         if (other.CompareTag("Snowball"))
         {
-            player.Damage(7, false);
+            player.Damage(7, false, other.transform.position);
         }
 
         if (other.CompareTag("Icicle"))
         {
-            player.Damage(10, true);
+            player.Damage(10, true, other.transform.position);
         }
         
         Debug.Log(other.tag);

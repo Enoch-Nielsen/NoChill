@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Icicle
   - Snowball
+  - AudioManager
   layers:
   - Default
   - TransparentFX
