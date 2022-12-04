@@ -6,7 +6,6 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] public float speed = 1;
     private GameObject player = null;
-    //[SerializeField] private bool isIcicle = false;
     public int attackNumber = 1;
     public int leftRight = 1;
     public float destroyTime = 3;
@@ -58,8 +57,4 @@ public class Projectile : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    /*public Transform GetTransform()
-    {
-        return this.transform;
-    }*/
 }
