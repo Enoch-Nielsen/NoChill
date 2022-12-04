@@ -13,8 +13,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private GameObject trail;
     [SerializeField] private GameObject trailBlaze;
-    
-    [Header("Player Move")]
+
+    [Header("Player Move")] 
+    [SerializeField] private bool canMove = true;
     [SerializeField] private float playerSpeed;
     [SerializeField] private Vector2 playerMove, playerMoveGoal;
     [SerializeField] private float moveLerpSpeed, currentLerpSpeed;
@@ -53,6 +54,9 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
+        if (!canMove)
+            return;
+        
         if (dodgeTimer < dodgeMaxTime)
         {
             currentSpeed = Mathf.Lerp(currentSpeed, speedGoal, speedDodgeLerp * Time.deltaTime);
@@ -93,6 +97,13 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canMove)
+        {
+            rb2d.velocity = Vector2.zero;
+            return;
+        }
+
+            
         outsideForce = Vector2.Lerp(outsideForce, Vector2.zero, outsideForceLerp * Time.deltaTime);
         rb2d.velocity = ((playerMove * currentSpeed) + (outsideForce)) * 200.0f * Time.fixedDeltaTime;
 
@@ -150,12 +161,17 @@ public class PlayerMove : MonoBehaviour
             
             dodgeTimer = 0.0f;
             dodgeDelayTimer = 0.0f;
-        }
-
-        Instantiate(trailBlaze, transform.position, Quaternion.identity);
+            
+            Instantiate(trailBlaze, transform.position, Quaternion.identity);
         
-        audioManager.AddSoundToQueue(dodge, false, 0.35f);
+            audioManager.AddSoundToQueue(dodge, false, 0.35f);
 
-        player.SetInvincible(0.55f);
+            player.SetInvincible(0.55f);
+        }
+    }
+
+    public void SetPlayerCanMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }

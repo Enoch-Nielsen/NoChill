@@ -8,10 +8,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private PlayerMove playerMove;
+    [SerializeField] private Animator animator;
 
     [SerializeField] private float impactForce;
     
-    [SerializeField] private float rage, maxRage;
+    [SerializeField] private float rage, maxRage, startRage;
     [SerializeField] private float rageSpeed, slowedRageSpeed;
     
     [SerializeField] private bool isSlowed;
@@ -21,22 +22,28 @@ public class Player : MonoBehaviour
     [SerializeField] private float invincibilityTimer, invincibilityMax;
 
     [SerializeField] private bool punchReady;
+
+    [SerializeField] private GameObject punchTrail, punchFX;
     
     [Header("Audio")] 
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private AudioClip hurt;
+    [SerializeField] private AudioClip hurt, bossPunch;
 
     private void Start()
     {
         isInvincible = false;
 
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
+
+        cameraShake = GameObject.FindWithTag("CameraShake").GetComponent<CameraShake>();
+
+        rage = startRage;
     }
 
     private void Update()
     {
         if (rage < maxRage)
-            rage += (isSlowed ? rageSpeed : slowedRageSpeed) * Time.deltaTime;
+            rage += (isSlowed ? slowedRageSpeed : rageSpeed) * Time.deltaTime;
         else
             punchReady = true;
 
@@ -51,7 +58,7 @@ public class Player : MonoBehaviour
             isInvincible = false;
 
         if (punchReady)
-            SetInvincible(100.0f);
+            SetInvincible(2.0f);
     }
 
     // for rage text value.
@@ -111,7 +118,7 @@ public class Player : MonoBehaviour
 
         slowTimer = 0.0f;
         
-        SetInvincible(0.25f);
+        SetInvincible(0.65f);
 
         audioManager.AddSoundToQueue(hurt, false, 0.35f);
 
@@ -119,11 +126,54 @@ public class Player : MonoBehaviour
         
         playerMove.AddForce(impact * impactForce);
 
-        //cameraShake.Shake(0.25f);
+        cameraShake.Shake(0.35f);
     }
 
     public bool IsInvincible()
     {
         return isInvincible;
+    }
+
+    public bool PunchIsReady()
+    {
+        return punchReady;
+    }
+
+    public void Punch()
+    {
+        SetInvincible(5.0f);
+        
+        animator.SetBool("Punch", true);
+        
+        playerMove.SetPlayerCanMove(false);
+
+        punchReady = false;
+        
+        punchTrail.SetActive(true);
+        
+        Invoke(nameof(SpawnPunchFX), 0.35f);
+        Invoke(nameof(EndPunch), 1.35f);
+        Invoke(nameof(ShakeDelay), 0.05f);
+    }
+
+    private void ShakeDelay()
+    {
+        cameraShake.Shake(1.0f);
+    }
+
+    private void SpawnPunchFX()
+    {
+        Instantiate(punchFX, transform.position + new Vector3(-0.3f, 0.0f, 0.0f), Quaternion.identity);
+        audioManager.AddSoundToQueue(bossPunch, false, 0.65f);
+    }
+
+    private void EndPunch()
+    {
+        punchTrail.SetActive(false);
+        animator.SetBool("Punch", false);
+        
+        playerMove.SetPlayerCanMove(true);
+
+        rage = startRage;
     }
 }
