@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Rigidbody2D rb2d;
     [SerializeField] private Animator animator;
     [SerializeField] private Player player;
+    [SerializeField] private GameObject trail;
+    [SerializeField] private GameObject trailBlaze;
     
     [Header("Player Move")]
     [SerializeField] private float playerSpeed;
@@ -17,10 +20,18 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float moveLerpSpeed, currentLerpSpeed;
     [SerializeField] private float currentSpeed, speedGoal, speedLerp, speedDodgeLerp;
 
+    [Header("Player Velocity")] 
+    [SerializeField] private Vector2 outsideForce;
+    [SerializeField] private float outsideForceLerp;
+    
     [Header("Player Dodge")] 
     [SerializeField] private float dodgeSpeed;
     [SerializeField] private float dodgeMoveLerp;
     [SerializeField] private float dodgeMaxTime, dodgeTimer;
+
+    [Header("Audio")] 
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private AudioClip dodge;
     
     public float dodgeDelay { get; private set; }
     public float dodgeDelayTimer { get; private set; }
@@ -36,6 +47,8 @@ public class PlayerMove : MonoBehaviour
         dodgeDelayTimer = 0.0f;
 
         dodgeDelay = 1f;
+        
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -47,12 +60,16 @@ public class PlayerMove : MonoBehaviour
             dodgeTimer += Time.deltaTime;
 
             isDodge = true;
+            
+            trail.SetActive(true);
         }
         else
         {
             speedGoal = playerSpeed;
             currentSpeed = Mathf.Lerp(currentSpeed, speedGoal, speedLerp * Time.deltaTime);
             currentLerpSpeed = moveLerpSpeed;
+
+            trail.SetActive(false);
             
             isDodge = false;
             isMoving = playerMove.magnitude > 0.15f;
@@ -76,7 +93,8 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb2d.velocity = playerMove * currentSpeed * 200.0f * Time.fixedDeltaTime;
+        outsideForce = Vector2.Lerp(outsideForce, Vector2.zero, outsideForceLerp * Time.deltaTime);
+        rb2d.velocity = ((playerMove * currentSpeed) + (outsideForce)) * 200.0f * Time.fixedDeltaTime;
 
         Vector2 vel = RoundAnimVelocity();
         
@@ -104,6 +122,11 @@ public class PlayerMove : MonoBehaviour
         return temp;
     }
 
+    public void AddForce(Vector2 force)
+    {
+        outsideForce = force;
+    }
+
     private void OnMove(InputValue value)
     {
         Vector2 temp = value.Get<Vector2>();
@@ -128,7 +151,11 @@ public class PlayerMove : MonoBehaviour
             dodgeTimer = 0.0f;
             dodgeDelayTimer = 0.0f;
         }
+
+        Instantiate(trailBlaze, transform.position, Quaternion.identity);
         
-        player.SetInvincible(dodgeMaxTime * 5);
+        audioManager.AddSoundToQueue(dodge, false, 0.35f);
+
+        player.SetInvincible(0.55f);
     }
 }

@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private PlayerMove playerMove;
+
+    [SerializeField] private float impactForce;
     
     [SerializeField] private float rage, maxRage;
     [SerializeField] private float rageSpeed, slowedRageSpeed;
@@ -18,10 +21,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float invincibilityTimer, invincibilityMax;
 
     public bool punchReady { get; private set; }
+    
+    [Header("Audio")] 
+    [SerializeField] private AudioManager audioManager;
+    [SerializeField] private AudioClip hurt;
 
     private void Start()
     {
         isInvincible = false;
+
+        audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     private void Update()
@@ -86,7 +95,7 @@ public class Player : MonoBehaviour
      * will damage the player by the damageValue, slow will decrease rage increments temporarily, does nothing if the player
      * is invincible.
      */
-    public void Damage(float damageValue, bool doesSlow)
+    public void Damage(float damageValue, bool doesSlow, Vector2 hitPosition)
     {
         if (isInvincible)
         {
@@ -106,7 +115,13 @@ public class Player : MonoBehaviour
         slowTimer = 0.0f;
         
         SetInvincible(0.25f);
+
+        audioManager.AddSoundToQueue(hurt, false, 0.35f);
+
+        Vector2 impact = new Vector2(transform.position.x, transform.position.y) - hitPosition * -1.0f;
         
+        playerMove.AddForce(impact * impactForce);
+
         //cameraShake.Shake(0.25f);
     }
 }

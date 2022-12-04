@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 1;
+    [SerializeField] public float speed = 1;
     private GameObject player = null;
-    [SerializeField] private bool isIcicle = false;
+    //[SerializeField] private bool isIcicle = false;
     public int attackNumber = 1;
     public int leftRight = 1;
     private Quaternion xRotation;
+    public float destroyTime = 3;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if(attackNumber == 1 || attackNumber == 5)
+        if(attackNumber == 1 || attackNumber == 5 || attackNumber == 6 || attackNumber == 8)
         {
             transform.LookAt(player.transform);
         }
@@ -26,7 +27,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(attackNumber == 1 || attackNumber == 5)
+        if(attackNumber == 1 || attackNumber == 5 || attackNumber == 6 || attackNumber == 8)
         {
             transform.Translate((Vector3.forward).normalized * Time.deltaTime * speed);
         }
@@ -36,7 +37,7 @@ public class Projectile : MonoBehaviour
             transform.Translate((Vector3.down).normalized * Time.deltaTime * speed);
         }
 
-        if(attackNumber == 3)
+        if(attackNumber == 3 || attackNumber == 7)
         {
             transform.Translate(Vector3.forward.normalized * Time.deltaTime * speed);
         }
@@ -50,7 +51,7 @@ public class Projectile : MonoBehaviour
 
     private IEnumerator SelfDestruct()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(destroyTime);
         Destroy(this.gameObject);
     }
 
