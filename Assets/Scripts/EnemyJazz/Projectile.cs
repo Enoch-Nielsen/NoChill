@@ -47,6 +47,10 @@ public class Projectile : MonoBehaviour
             transform.Translate(Vector3.forward.normalized * Time.deltaTime * speed);
         }
 
+        if(attackNumber == 9)
+        {
+            transform.Translate(Vector3.down.normalized * Time.deltaTime * speed);
+        }
     }
 
     private IEnumerator SelfDestruct()
