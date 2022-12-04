@@ -6,7 +6,7 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] public float speed = 1;
     private GameObject player = null;
-    [SerializeField] private bool isIcicle = false;
+    //[SerializeField] private bool isIcicle = false;
     public int attackNumber = 1;
     public int leftRight = 1;
     private Quaternion xRotation;
@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        if(attackNumber == 1 || attackNumber == 5 || attackNumber == 6)
+        if(attackNumber == 1 || attackNumber == 5 || attackNumber == 6 || attackNumber == 8)
         {
             transform.LookAt(player.transform);
         }
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(attackNumber == 1 || attackNumber == 5 || attackNumber == 6)
+        if(attackNumber == 1 || attackNumber == 5 || attackNumber == 6 || attackNumber == 8)
         {
             transform.Translate((Vector3.forward).normalized * Time.deltaTime * speed);
         }
@@ -37,7 +37,7 @@ public class Projectile : MonoBehaviour
             transform.Translate((Vector3.down).normalized * Time.deltaTime * speed);
         }
 
-        if(attackNumber == 3)
+        if(attackNumber == 3 || attackNumber == 7)
         {
             transform.Translate(Vector3.forward.normalized * Time.deltaTime * speed);
         }
