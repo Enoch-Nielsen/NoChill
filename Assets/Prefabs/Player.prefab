@@ -606,8 +606,8 @@ GameObject:
   - component: {fileID: 6764526663455990581}
   - component: {fileID: 7879891813780075871}
   - component: {fileID: 6736037435301117273}
-  - component: {fileID: 6736037435301117272}
   - component: {fileID: 1340129068448568825}
+  - component: {fileID: 998428525194249960}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -710,7 +710,7 @@ MonoBehaviour:
   hurt: {fileID: 8300000, guid: 0cf370a8e91e2384ea63a51a1cb97f07, type: 3}
   bossPunch: {fileID: 8300000, guid: 967d97817f8797f4ca1dc678dd137112, type: 3}
   rageHitMax: {fileID: 8300000, guid: 31901949ff7119941b69ead7e6a74a5e, type: 3}
-  raging: {fileID: 8300000, guid: 117384367ea53c946a5c9e98f99a4dee, type: 3}
+  raging: {fileID: 8300000, guid: fd1473c1a5405c741938215cb9cd3f00, type: 3}
   flare: {fileID: 8300000, guid: b45c5774afe7e2f4b87bbacaa7541514, type: 3}
   powerUp: {fileID: 8300000, guid: 09ffd91d19b54db48a705f6827e6abae, type: 3}
 --- !u!114 &6736037435301117276
@@ -803,32 +803,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &6736037435301117272
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6736037435301117279}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.15}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3}
-  m_EdgeRadius: 0
 --- !u!61 &1340129068448568825
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -855,6 +829,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
+--- !u!58 &998428525194249960
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6736037435301117279}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.15}
+  serializedVersion: 2
+  m_Radius: 0.1
 --- !u!1 &7185253621346707370
 GameObject:
   m_ObjectHideFlags: 0
