@@ -327,8 +327,8 @@ public class ProjectileSpawner : MonoBehaviour
         projectileSpawnPoint = new Vector3(xPos1, yPos, 0.0f);
     }
 
-    public void IncreaseMoves()
+    public void IncreaseMoves(int newMoveCount)
     {
-        totalAttacks += 3;
+        totalAttacks = newMoveCount;
     }
 }
