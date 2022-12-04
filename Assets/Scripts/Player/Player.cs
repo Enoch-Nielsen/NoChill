@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMove playerMove;
     [SerializeField] private Animator animator;
     [SerializeField] private StageManager stageManager;
+    [SerializeField] private GameObject flarePower;
 
     [SerializeField] private int currentStage = 1;
         
@@ -27,6 +28,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool punchReady;
 
     [SerializeField] private GameObject punchTrail, punchFX;
+
+    [SerializeField] private bool powerUpReady;
     
     [Header("Audio")] 
     [SerializeField] private AudioManager audioManager;
@@ -187,5 +190,19 @@ public class Player : MonoBehaviour
         playerMove.SetPlayerCanMove(true);
 
         rage = startRage;
+    }
+
+    public void SetPowerUpReady()
+    {
+        powerUpReady = true;
+    }
+
+    private void OnPowerUp()
+    {
+        if (!powerUpReady)
+            return;
+        
+        Instantiate(flarePower, transform.position, Quaternion.identity);
+        powerUpReady = false;
     }
 }

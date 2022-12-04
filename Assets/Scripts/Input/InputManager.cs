@@ -44,6 +44,15 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PowerUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""67b664bb-5626-49bf-99b7-7692bf41c215"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -167,6 +176,28 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e76f21a0-e122-45ad-82ff-adbcbd3a97d1"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21bc2121-5381-4867-a45e-24d3b485b547"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PowerUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -177,6 +208,7 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
         m_Play = asset.FindActionMap("Play", throwIfNotFound: true);
         m_Play_Move = m_Play.FindAction("Move", throwIfNotFound: true);
         m_Play_Dodge = m_Play.FindAction("Dodge", throwIfNotFound: true);
+        m_Play_PowerUp = m_Play.FindAction("PowerUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,12 +270,14 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     private IPlayActions m_PlayActionsCallbackInterface;
     private readonly InputAction m_Play_Move;
     private readonly InputAction m_Play_Dodge;
+    private readonly InputAction m_Play_PowerUp;
     public struct PlayActions
     {
         private @InputManager m_Wrapper;
         public PlayActions(@InputManager wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Play_Move;
         public InputAction @Dodge => m_Wrapper.m_Play_Dodge;
+        public InputAction @PowerUp => m_Wrapper.m_Play_PowerUp;
         public InputActionMap Get() { return m_Wrapper.m_Play; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -259,6 +293,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Dodge.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnDodge;
+                @PowerUp.started -= m_Wrapper.m_PlayActionsCallbackInterface.OnPowerUp;
+                @PowerUp.performed -= m_Wrapper.m_PlayActionsCallbackInterface.OnPowerUp;
+                @PowerUp.canceled -= m_Wrapper.m_PlayActionsCallbackInterface.OnPowerUp;
             }
             m_Wrapper.m_PlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -269,6 +306,9 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @PowerUp.started += instance.OnPowerUp;
+                @PowerUp.performed += instance.OnPowerUp;
+                @PowerUp.canceled += instance.OnPowerUp;
             }
         }
     }
@@ -277,5 +317,6 @@ public partial class @InputManager : IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnPowerUp(InputAction.CallbackContext context);
     }
 }
