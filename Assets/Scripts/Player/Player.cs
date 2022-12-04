@@ -9,7 +9,10 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraShake cameraShake;
     [SerializeField] private PlayerMove playerMove;
     [SerializeField] private Animator animator;
+    [SerializeField] private StageManager stageManager;
 
+    [SerializeField] private int currentStage = 1;
+        
     [SerializeField] private float impactForce;
     
     [SerializeField] private float rage, maxRage, startRage;
@@ -147,13 +150,22 @@ public class Player : MonoBehaviour
         
         playerMove.SetPlayerCanMove(false);
 
-        punchReady = false;
-        
+        punchReady = false;        
+        rage = startRage;
+
         punchTrail.SetActive(true);
+
+        currentStage++;
         
         Invoke(nameof(SpawnPunchFX), 0.35f);
         Invoke(nameof(EndPunch), 1.35f);
         Invoke(nameof(ShakeDelay), 0.05f);
+        Invoke(nameof(NextPhaseTrigger), 0.1f);
+    }
+
+    private void NextPhaseTrigger()
+    {
+        stageManager.SelectStage(currentStage);
     }
 
     private void ShakeDelay()

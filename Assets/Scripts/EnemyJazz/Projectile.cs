@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour
     //[SerializeField] private bool isIcicle = false;
     public int attackNumber = 1;
     public int leftRight = 1;
-    private Quaternion xRotation;
     public float destroyTime = 3;
     // Start is called before the first frame update
     void Start()
@@ -59,8 +58,8 @@ public class Projectile : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public Transform GetTransform()
+    /*public Transform GetTransform()
     {
         return this.transform;
-    }
+    }*/
 }
