@@ -172,8 +172,6 @@ public class Player : MonoBehaviour
     {
         SetInvincible(5.0f);
         
-        audioManager.StopAllSounds();
-        
         animator.SetBool("Punch", true);
         
         playerMove.SetPlayerCanMove(false);
@@ -246,6 +244,9 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        if (isDead)
+            return;
+
         animator.SetBool("Dead", true);
         
         playerMove.SetPlayerCanMove(false);
