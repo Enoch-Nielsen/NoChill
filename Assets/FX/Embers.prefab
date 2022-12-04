@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 4307554809986682010}
   - component: {fileID: 2195163872954939262}
   - component: {fileID: 8101305496964362278}
-  - component: {fileID: 6450460632002260267}
   m_Layer: 0
   m_Name: EmberPart
   m_TagString: Untagged
@@ -1356,17 +1355,17 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.71469873, b: 0.41037738, a: 1}
-        key1: {r: 1, g: 0.69149554, b: 0.19339621, a: 0.41568628}
-        key2: {r: 1, g: 0.988361, b: 0.7877358, a: 0}
+        key0: {r: 1, g: 0.71469873, b: 0.41037738, a: 0.75686276}
+        key1: {r: 1, g: 0.988361, b: 0.7877358, a: 0.41568628}
+        key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 964
-        ctime2: 65535
+        ctime1: 65535
+        ctime2: 0
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -1381,7 +1380,7 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_NumColorKeys: 3
+        m_NumColorKeys: 2
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -4864,16 +4863,3 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &6450460632002260267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9156760373717511636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e487976860ed6448a9cbb151c1b02b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Prefab: {fileID: 8902975981384394796, guid: 455b9a925998cf34d8d390be7e1bf3ed, type: 3}

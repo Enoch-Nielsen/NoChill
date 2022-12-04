@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4001377125870575168}
   - component: {fileID: 7231936478967985297}
   - component: {fileID: 713778563659285677}
-  - component: {fileID: 9049364229116163729}
   m_Layer: 0
   m_Name: TrailBlaze
   m_TagString: Untagged
@@ -1307,7 +1306,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.80618495, b: 0.05098039, a: 1}
+        key0: {r: 1, g: 0.74793357, b: 0.051886797, a: 1}
         key1: {r: 1, g: 0.6149326, b: 0.051886797, a: 0.27450982}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4827,16 +4826,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 219e761b51482fb4f9b809db559118b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9049364229116163729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1345677316176342969}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e487976860ed6448a9cbb151c1b02b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Prefab: {fileID: 8902975981384394796, guid: 455b9a925998cf34d8d390be7e1bf3ed, type: 3}

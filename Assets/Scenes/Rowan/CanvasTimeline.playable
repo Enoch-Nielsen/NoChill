@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2398719252858513094
+--- !u!114 &-6356157294437411162
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -22,12 +22,12 @@ MonoBehaviour:
   m_Children: []
   m_Clips:
   - m_Version: 1
-    m_Start: 0
+    m_Start: 1.0630450248718262
     m_ClipIn: 0
-    m_Asset: {fileID: 8474084029282567202}
+    m_Asset: {fileID: 5443992527714008552}
     m_Duration: 96.52244897959184
     m_TimeScale: 1
-    m_ParentTrack: {fileID: -2398719252858513094}
+    m_ParentTrack: {fileID: -6356157294437411162}
     m_EaseInDuration: 0
     m_EaseOutDuration: 0
     m_BlendInDuration: -1
@@ -110,14 +110,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 0
   m_Tracks:
-  - {fileID: -2398719252858513094}
+  - {fileID: -6356157294437411162}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
     m_ScenePreview: 1
   m_DurationMode: 0
   m_MarkerTrack: {fileID: 0}
---- !u!114 &8474084029282567202
+--- !u!114 &5443992527714008552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f10dd60657c6004587f237a7e90f8e4, type: 3}
   m_Name: AudioPlayableAsset
   m_EditorClassIdentifier: 
-  m_Clip: {fileID: 8300000, guid: 5e0c51b070c609644a653c8c5271915b, type: 3}
+  m_Clip: {fileID: 8300000, guid: cbff57268cb0dc948ab6e415d82651d0, type: 3}
   m_Loop: 0
   m_bufferingTime: 0.1
   m_ClipProperties:
