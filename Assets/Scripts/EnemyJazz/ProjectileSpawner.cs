@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField] private GameObject icicle = null;
     public GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 8;
+    private int totalAttacks = 9;
     
     //Boundries
     private float xMin = 11;
@@ -44,7 +44,7 @@ public class ProjectileSpawner : MonoBehaviour
     private void StartAttack()
     {
         attackNumber = GetAttackNumber();
-        if(attackNumber == 1)
+        if (attackNumber == 1)
         {
             StartCoroutine(Attack1());
             return;
@@ -80,15 +80,21 @@ public class ProjectileSpawner : MonoBehaviour
             return;
         }
 
-        if(attackNumber == 7)
+        if (attackNumber == 7)
         {
             StartCoroutine(Attack7One());
             return;
         }
 
-        if(attackNumber == 8)
+        if (attackNumber == 8)
         {
             StartCoroutine(Attack8());
+        }
+
+        if (attackNumber == 9)
+        {
+            StartCoroutine(Attack9());
+            return;
         }
     }
 
@@ -256,6 +262,34 @@ public class ProjectileSpawner : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
     }
 
+    private IEnumerator Attack9()
+    {
+        projectileSpawnPoint.y = 6;
+        projectileSpawnPoint.x = -3;
+        snowBall.GetComponent<Projectile>().attackNumber = attackNumber;
+
+        for (int i = 0; i < 7; i++)
+        {
+            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+            projectileSpawnPoint.x++;
+        }
+        yield return new WaitForSeconds(1);
+        projectileSpawnPoint.x = -11;
+        for(int e = 0; e < 7; e++)
+        {
+            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+            projectileSpawnPoint.x++;
+        }
+        projectileSpawnPoint.x = 11;
+        for(int a = 0; a < 7; a++)
+        {
+            Instantiate(snowBall, projectileSpawnPoint, snowBall.transform.rotation);
+            projectileSpawnPoint.x--;
+        }
+
+        StartCoroutine(HoldAttack());
+    }
+
     private IEnumerator HoldAttack()
     {
         yield return new WaitForSeconds(1.5f);
@@ -291,5 +325,10 @@ public class ProjectileSpawner : MonoBehaviour
         side *= -1;
         xPos1 = Random.Range(-11, 12);
         projectileSpawnPoint = new Vector3(xPos1, yPos, 0.0f);
+    }
+
+    public void IncreaseMoves(int newMoveCount)
+    {
+        totalAttacks = newMoveCount;
     }
 }
