@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private StageManager stageManager;
     [SerializeField] private GameObject flarePower, rageFx;
+    [SerializeField] private ProjectileSpawner spawner;
 
     [SerializeField] private int currentStage = 1;
         
@@ -32,6 +34,8 @@ public class Player : MonoBehaviour
     [SerializeField] private bool powerUpReady;
 
     [SerializeField] private bool audioTriggered;
+
+    [SerializeField] private bool isDead;
     
     [Header("Audio")] 
     [SerializeField] private AudioManager audioManager;
@@ -50,6 +54,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (isDead)
+            return;
+        
+        if (rage <= 0)
+            Die();
+        
         if (rage < maxRage)
             rage += (isSlowed ? slowedRageSpeed : rageSpeed) * Time.deltaTime;
         else
@@ -65,8 +75,7 @@ public class Player : MonoBehaviour
                 audioTriggered = true;
             }
         }
-
-
+        
         if (slowTimer < slowTimerMax)
             slowTimer += Time.deltaTime;
         else
@@ -233,5 +242,23 @@ public class Player : MonoBehaviour
         powerUpReady = false;
         
         audioManager.AddSoundToQueue(flare, false, 0.35f);
+    }
+
+    private void Die()
+    {
+        animator.SetBool("Dead", true);
+        
+        playerMove.SetPlayerCanMove(false);
+
+        isDead = true;
+
+        spawner.gameObject.SetActive(false);
+        
+        Invoke(nameof(MoveToChill), 5.0f);
+    }
+
+    private void MoveToChill()
+    {
+        SceneManager.LoadScene("ChillScene");
     }
 }

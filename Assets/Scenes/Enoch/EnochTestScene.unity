@@ -647,6 +647,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1744079588963540995, guid: 65c7685a2952efa4a8c741dec817fbb1, type: 3}
     - target: {fileID: 8098451945829817865, guid: 511aaca312dac0f42a39e7e7f3e1b5ce, type: 3}
+      propertyPath: spawner
+      value: 
+      objectReference: {fileID: 1585007970}
+    - target: {fileID: 8098451945829817865, guid: 511aaca312dac0f42a39e7e7f3e1b5ce, type: 3}
       propertyPath: rageSpeed
       value: 1
       objectReference: {fileID: 0}
