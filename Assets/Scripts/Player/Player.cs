@@ -17,10 +17,10 @@ public class Player : MonoBehaviour
     [SerializeField] private bool isSlowed;
     [SerializeField] private float slowTimer, slowTimerMax;
 
-    public bool isInvincible { get; private set;}
+    [SerializeField] private bool isInvincible;
     [SerializeField] private float invincibilityTimer, invincibilityMax;
 
-    public bool punchReady { get; private set; }
+    [SerializeField] private bool punchReady;
     
     [Header("Audio")] 
     [SerializeField] private AudioManager audioManager;
@@ -52,8 +52,6 @@ public class Player : MonoBehaviour
 
         if (punchReady)
             SetInvincible(100.0f);
-        
-       // Debug.Log(isInvincible);
     }
 
     // for rage text value.
@@ -99,7 +97,6 @@ public class Player : MonoBehaviour
     {
         if (isInvincible)
         {
-            Debug.Log("Damage Failed");
             return;
         }
         
@@ -123,5 +120,10 @@ public class Player : MonoBehaviour
         playerMove.AddForce(impact * impactForce);
 
         //cameraShake.Shake(0.25f);
+    }
+
+    public bool IsInvincible()
+    {
+        return isInvincible;
     }
 }
