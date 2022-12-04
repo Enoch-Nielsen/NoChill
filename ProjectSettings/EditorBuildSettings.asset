@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalScene.unity
     guid: 13b8c727f8d3bdc4790f4f6a96b9d878
+  - enabled: 1
+    path: Assets/Scenes/ChillScene.unity
+    guid: 8459a8ecd9099894587f780b0a4a1897
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 253b37454fc40cf49bb6b8cf10d3e015, type: 2}
