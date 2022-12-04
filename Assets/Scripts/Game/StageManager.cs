@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -25,7 +26,7 @@ public class StageManager : MonoBehaviour
 
     public void SelectStage(int stage)
     {
-        if (stage > 3)
+        if (stage > 4)
             return;
 
         currentStage = stage;
@@ -48,6 +49,11 @@ public class StageManager : MonoBehaviour
             Invoke(nameof(SwitchTheme), 3f);
 
             snowmanAnimator.SetInteger("Stage", 3);
+        }
+
+        if (stage == 4)
+        {
+            SceneManager.LoadScene("ChillScene");
         }
         
         pSpawner.IncreaseMoves();
