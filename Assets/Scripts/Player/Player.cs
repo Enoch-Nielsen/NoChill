@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerMove playerMove;
     [SerializeField] private Animator animator;
     [SerializeField] private StageManager stageManager;
-    [SerializeField] private GameObject flarePower;
+    [SerializeField] private GameObject flarePower, rageFx;
 
     [SerializeField] private int currentStage = 1;
         
@@ -30,10 +30,12 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject punchTrail, punchFX;
 
     [SerializeField] private bool powerUpReady;
+
+    [SerializeField] private bool audioTriggered;
     
     [Header("Audio")] 
     [SerializeField] private AudioManager audioManager;
-    [SerializeField] private AudioClip hurt, bossPunch;
+    [SerializeField] private AudioClip hurt, bossPunch, rageHitMax, raging, flare, powerUp;
 
     private void Start()
     {
@@ -51,7 +53,19 @@ public class Player : MonoBehaviour
         if (rage < maxRage)
             rage += (isSlowed ? slowedRageSpeed : rageSpeed) * Time.deltaTime;
         else
+        {
             punchReady = true;
+
+            if (!audioTriggered)
+            {
+                audioManager.StopAllSounds();
+                audioManager.AddSoundToQueue(rageHitMax, false, 0.55f);
+                Invoke(nameof(StartRageSound), 0.75f);
+
+                audioTriggered = true;
+            }
+        }
+
 
         if (slowTimer < slowTimerMax)
             slowTimer += Time.deltaTime;
@@ -149,6 +163,8 @@ public class Player : MonoBehaviour
     {
         SetInvincible(5.0f);
         
+        audioManager.StopAllSounds();
+        
         animator.SetBool("Punch", true);
         
         playerMove.SetPlayerCanMove(false);
@@ -164,6 +180,8 @@ public class Player : MonoBehaviour
         Invoke(nameof(EndPunch), 1.35f);
         Invoke(nameof(ShakeDelay), 0.05f);
         Invoke(nameof(NextPhaseTrigger), 0.1f);
+
+        audioTriggered = false;
     }
 
     private void NextPhaseTrigger()
@@ -190,11 +208,20 @@ public class Player : MonoBehaviour
         playerMove.SetPlayerCanMove(true);
 
         rage = startRage;
+
+        rageFx.SetActive(false);
+    }
+
+    private void StartRageSound()
+    {
+        audioManager.AddSoundToQueue(raging, true, 0.35f);
+        rageFx.SetActive(true);
     }
 
     public void SetPowerUpReady()
     {
         powerUpReady = true;
+        audioManager.AddSoundToQueue(powerUp, false, 0.45f);
     }
 
     private void OnPowerUp()
@@ -204,5 +231,7 @@ public class Player : MonoBehaviour
         
         Instantiate(flarePower, transform.position, Quaternion.identity);
         powerUpReady = false;
+        
+        audioManager.AddSoundToQueue(flare, false, 0.35f);
     }
 }

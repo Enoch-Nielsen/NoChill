@@ -15,6 +15,8 @@ public class StageManager : MonoBehaviour
 
     [SerializeField] private int currentStage;
 
+    [SerializeField] private ProjectileSpawner pSpawner;
+
     private void Start()
     {
         audioManager = GameObject.FindWithTag("AudioManager").GetComponent<AudioManager>();
@@ -30,23 +32,25 @@ public class StageManager : MonoBehaviour
         
         if (stage == 1)
         {
-            Invoke(nameof(SwitchTheme), 1f);
+            Invoke(nameof(SwitchTheme), 0.25f);
             snowmanAnimator.SetInteger("Stage", 1);
         }
         
         if (stage == 2)
         {
-            Invoke(nameof(SwitchTheme), 1f);
+            Invoke(nameof(SwitchTheme), 3f);
 
             snowmanAnimator.SetInteger("Stage", 2);
         }
         
         if (stage == 3)
         {
-            Invoke(nameof(SwitchTheme), 1f);
+            Invoke(nameof(SwitchTheme), 3f);
 
             snowmanAnimator.SetInteger("Stage", 3);
         }
+        
+        pSpawner.IncreaseMoves();
         
         Invoke(nameof(StartShake), 2.75f);
     }
@@ -61,13 +65,12 @@ public class StageManager : MonoBehaviour
         audioManager.StopAllSounds();
         
         if (currentStage == 1)
-            audioManager.AddSoundToQueue(stage1, true, 0.2f);
-        
+            audioManager.AddSoundToQueue(stage1, true, 0.1f);
         
         if (currentStage == 2)
-            audioManager.AddSoundToQueue(stage2, true, 0.2f);
+            audioManager.AddSoundToQueue(stage2, true, 0.1f);
         
         if (currentStage == 3)
-            audioManager.AddSoundToQueue(stage3, true, 0.2f);
+            audioManager.AddSoundToQueue(stage3, true, 0.1f);
     }
 }

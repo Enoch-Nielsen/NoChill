@@ -57,7 +57,7 @@ public class AudioManager : MonoBehaviour
         foreach (var sound in soundsPlaying.ToArray())
         {
             sound.audioSource.Stop();
-            DestroyImmediate(sound.gameObject);
+            Destroy(sound.gameObject);
         }
     }
 }
