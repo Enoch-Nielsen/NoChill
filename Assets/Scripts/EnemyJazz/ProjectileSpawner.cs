@@ -8,7 +8,7 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField] private GameObject icicle = null;
     public GameObject player = null;
     private int attackNumber = 0;
-    private int totalAttacks = 6;
+    private int totalAttacks = 8;
     
     //Boundries
     private float xMin = 11;
@@ -78,6 +78,17 @@ public class ProjectileSpawner : MonoBehaviour
         {
             StartCoroutine(Attack6());
             return;
+        }
+
+        if(attackNumber == 7)
+        {
+            StartCoroutine(Attack7One());
+            return;
+        }
+
+        if(attackNumber == 8)
+        {
+            StartCoroutine(Attack8());
         }
     }
 
@@ -206,6 +217,43 @@ public class ProjectileSpawner : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         StartCoroutine(HoldAttack());
+    }
+
+    private IEnumerator Attack7One()
+    {
+        projectileSpawnPoint.y = 4.5f;
+        projectileSpawnPoint.x = -11;
+        for (int i = 0; i < 8; i++)
+        {
+            icicle.GetComponent<Projectile>().attackNumber = attackNumber;
+            yield return new WaitForSeconds(0.2f);
+            Instantiate(icicle, projectileSpawnPoint, icicle.transform.rotation);
+            projectileSpawnPoint.y--;
+        }
+
+        StartCoroutine(Attack7Two());
+    }
+
+    private IEnumerator Attack7Two()
+    {
+        yield return new WaitForSeconds(0.5f);
+        projectileSpawnPoint.y = 2.5f;
+        projectileSpawnPoint.x = -11;
+        for (int i = 0; i < 8; i++)
+        {
+            icicle.GetComponent<Projectile>().attackNumber = attackNumber;
+            yield return new WaitForSeconds(0.2f);
+            Instantiate(icicle, projectileSpawnPoint, icicle.transform.rotation);
+            projectileSpawnPoint.y--;
+        }
+        StartCoroutine(HoldAttack());
+    }
+
+    private IEnumerator Attack8()
+    {
+        icicle.GetComponent<Projectile>().attackNumber = attackNumber;
+        StartCoroutine(Attack7One());
+        yield return new WaitForSeconds(0.1f);
     }
 
     private IEnumerator HoldAttack()
