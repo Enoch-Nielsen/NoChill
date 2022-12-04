@@ -900,6 +900,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 169387816042777436, guid: f91d404afa6448b4281ff06d991e2fd2, type: 3}
+      propertyPath: stage2
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d94057621657034ea11e69497357bd7, type: 3}
+    - target: {fileID: 169387816042777436, guid: f91d404afa6448b4281ff06d991e2fd2, type: 3}
+      propertyPath: stage3
+      value: 
+      objectReference: {fileID: 8300000, guid: 5263b712c2e4f5d40ac644b82d5ee124, type: 3}
+    - target: {fileID: 169387816042777436, guid: f91d404afa6448b4281ff06d991e2fd2, type: 3}
       propertyPath: pSpawner
       value: 
       objectReference: {fileID: 1585007970}
