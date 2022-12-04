@@ -36,6 +36,6 @@ public class PlayerRotate : MonoBehaviour
         
         currentRotation = Mathf.Lerp(currentRotation, rotationGoal, Time.deltaTime * rotationLerp);
 
-        imageTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, currentRotation));
+        imageTransform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, currentRotation));
     }
 }

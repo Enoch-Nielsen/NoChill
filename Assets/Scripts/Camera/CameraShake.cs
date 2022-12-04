@@ -18,9 +18,8 @@ public class CameraShake : MonoBehaviour
 
     public void Shake(float duration)
     {
-        shakeTimer = 0.0f;
-
         shakeMaxTimer = duration;
+        shakeTimer = 0.0f;
 
         animator.SetBool("Shake", true);
     }

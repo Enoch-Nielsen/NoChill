@@ -7,7 +7,6 @@ TagManager:
   - Icicle
   - Snowball
   - AudioManager
-  - CameraShake
   layers:
   - Default
   - TransparentFX
