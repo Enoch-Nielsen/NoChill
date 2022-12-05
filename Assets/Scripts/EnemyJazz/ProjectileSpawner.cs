@@ -330,5 +330,10 @@ public class ProjectileSpawner : MonoBehaviour
     public void IncreaseMoves()
     {
         totalAttacks += 3;
+
+        if (totalAttacks > 9)
+        {
+            totalAttacks = 9;
+        }
     }
 }
