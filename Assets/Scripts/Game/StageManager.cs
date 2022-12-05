@@ -53,7 +53,9 @@ public class StageManager : MonoBehaviour
 
         if (stage == 4)
         {
-            SceneManager.LoadScene("ChillScene");
+            snowmanAnimator.SetInteger("Stage", 4);
+
+            Invoke(nameof(FinalSceneSwitch), 3.0f);
         }
         
         pSpawner.IncreaseMoves();
@@ -78,5 +80,10 @@ public class StageManager : MonoBehaviour
         
         if (currentStage == 3)
             audioManager.AddSoundToQueue(stage3, true, 0.1f);
+    }
+
+    private void FinalSceneSwitch()
+    {
+        SceneManager.LoadScene("VictoryScene");
     }
 }
